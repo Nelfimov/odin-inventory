@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app, {set} from '../app.js';
+import app from '../app.js';
 import debugLib from 'debug';
 import {createServer} from 'http';
 
@@ -14,7 +14,7 @@ const debug = debugLib('odin-inventory:server');
  */
 
 const port = normalizePort(process.env.PORT || '3000');
-set('port', port);
+app.set('port', port);
 
 /**
  * Create HTTP server.
@@ -32,8 +32,9 @@ server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
+ * @param {number} val - number
+ * @return {boolean} boolean value if the port is ok.
  */
-
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
@@ -52,16 +53,16 @@ function normalizePort(val) {
 
 /**
  * Event listener for HTTP server "error" event.
+ * @param {shape} error - error object
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ?
+    'Pipe ' + port :
+    'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -81,11 +82,10 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  const bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;
   debug('Listening on ' + bind);
 }

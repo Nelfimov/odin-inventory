@@ -1,8 +1,9 @@
 import createError from 'http-errors';
 import express, {json, urlencoded} from 'express';
-import {join} from 'path';
+import path, {join} from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import {fileURLToPath} from 'url';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
@@ -10,6 +11,9 @@ import usersRouter from './routes/users.js';
 const app = express();
 
 // view engine setup
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
