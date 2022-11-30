@@ -4,11 +4,17 @@ import path, {join} from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import {fileURLToPath} from 'url';
+import mongoose, {connect} from 'mongoose';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 
 const app = express();
+
+// Database set up
+connect('mongodb://localhost:27017/inventoryApp');
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 const __filename = fileURLToPath(import.meta.url);
@@ -43,3 +49,4 @@ app.use((err, req, res, next) => {
 });
 
 export default app;
+export {db};
