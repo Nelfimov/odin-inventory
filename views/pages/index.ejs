@@ -1,3 +1,11 @@
-<%- include('../partials/header') -%>
+<%- include('../partials/header') %>
 
-<%- include('../partials/footer') -%>
+<div class="item-container">
+  <% items.forEach((item) => %>
+  <div class="card">
+    <%= item.name %>
+  </div>
+  <% ) %>
+</div>
+
+<%- include('../partials/footer') %>
