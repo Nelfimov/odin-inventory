@@ -1,0 +1,11 @@
+<div class="card-container">
+  <% items.forEach((item) => { %>
+    <div class="card">
+      <span class="category"><%= item.category.name %></span>
+      <h3><%= item.name %></h3>
+      <p><%= item.description %></p>
+      <p class="price"><%= item.price %></p>
+      <p class="stock"><%= item.number_in_stock %></p>
+    </div>
+  <% }); %>
+</div>

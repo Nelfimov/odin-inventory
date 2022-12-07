@@ -73,6 +73,19 @@ header a:hover {
   background-color: var(--background-color-light);
 }
 
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+}
+
+.card {
+  padding: 0.5rem;
+  min-height: 150px;
+  border: 1px solid grey;
+  margin: 20px;
+}
+
 @media (max-width: 1000px) {
   header {
     padding: 1rem;

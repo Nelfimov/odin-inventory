@@ -7,17 +7,15 @@ const router = expressRouter();
 
 router.get('/:name', (req, res, next) => {
   const string = req.params.name;
-  const capitalized = string.charAt(0).toUpperCase + string.slice(1);
+  const capitalized = string.charAt(0).toUpperCase() + string.slice(1);
 
   async.parallel(
       {
         category(callback) {
-          Category.findOne({name: capitalized}, '_id').exec(callback);
+          Category.findOne({name: capitalized}).exec(callback);
         },
         items(callback) {
-          Item.find({'category.name': capitalized})
-              .populate('category')
-              .exec(callback);
+          Item.find().populate('category').exec(callback);
         },
       },
       (err, result) => {
@@ -25,16 +23,24 @@ router.get('/:name', (req, res, next) => {
 
         const {category, items} = result;
 
+        const filteredItems = items.filter(
+            (item) =>
+              item.category.name === capitalized || item.category.name === string,
+        );
+
+        console.log(items);
+
         if (category == null) {
           const error = new Error('Category not found');
           error.status = 404;
           return next(error);
         }
 
-        res.render('pages/category', {
+        res.render('pages/index', {
           title: category.name,
-          category: category.name,
-          items,
+          header: category.name,
+          subheader: category.description,
+          items: filteredItems,
         });
       },
   );

@@ -7,7 +7,12 @@ router.get('/', (req, res, next) => {
   Item.find({}, 'name description category price number_in_stock')
       .lean()
       .then((items) => {
-        res.render('pages/index', {title: 'Home', items});
+        res.render('pages/index', {
+          title: 'Home',
+          header: 'Welcome',
+          subheader: '',
+          items,
+        });
       })
       .catch((err) => next(err));
 });
