@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<h1><%= header %></h1>
+
+<form method="post">
+  <label for="name">Name</label>
+  <input required type="text" name="name" id="name">
+  <label for="description">Description</label>
+  <textarea name="description" id="description" cols="10" rows="3"></textarea>
+  <label for="category">category</label>
+  <select name="category" id="category">
+    <% categories.forEach((category) => { %>
+     <option value=<%= category._id %>><%= category.name %></option>
+    <% }); %>
+  </select>
+  <label for="price">Price</label>
+  <input required type="number" name="price" id="price">
+  <label for="stock">Stock</label>
+  <input required type="number" name="stock" id="stock">
+  <button>Submit</button>
+</form>
+
+<%- include('../partials/footer') %>

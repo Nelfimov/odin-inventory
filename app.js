@@ -8,6 +8,7 @@ import mongoose, {connect} from 'mongoose';
 
 import indexRouter from './routes/index.js';
 import categoriesRouter from './routes/categories.js';
+import itemRouter from './routes/items.js';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/items', itemRouter);
 app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
