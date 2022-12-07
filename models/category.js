@@ -5,9 +5,7 @@ const CategorySchema = new Schema({
   description: {type: String, required: true, maxLength: 100},
 });
 
-// Virtual for author's URL
-CategorySchema.virtual('url').get(() => `/catalog/category/${_id}`);
+CategorySchema.virtual('url').get(() => `/categories/${name}`);
 
-// Export model
 const Category = model('Category', CategorySchema);
 export default Category;

@@ -8,9 +8,7 @@ const ItemSchema = new Schema({
   number_in_stock: {type: Number, required: true},
 });
 
-// Virtual for item's URL
-ItemSchema.virtual('url').get(() => `/catalog/item/${_id}`);
+ItemSchema.virtual('url').get(() => `/items/${_id}`);
 
-// Export model
 const Item = model('Item', ItemSchema);
 export default Item;

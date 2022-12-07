@@ -7,12 +7,15 @@ import {fileURLToPath} from 'url';
 import mongoose, {connect} from 'mongoose';
 
 import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
+import categoriesRouter from './routes/categories.js';
 
 const app = express();
 
 // Database set up
-connect('mongodb://127.0.0.1:27017/inventoryApp');
+connect('mongodb://127.0.0.1:27017/inventoryApp', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -30,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
