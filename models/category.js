@@ -1,3 +1,4 @@
+/* eslint-disable no-invalid-this */
 import {Schema, model} from 'mongoose';
 
 const CategorySchema = new Schema({
@@ -5,7 +6,9 @@ const CategorySchema = new Schema({
   description: {type: String, required: true, maxLength: 100},
 });
 
-CategorySchema.virtual('url').get(() => `/categories/${name}`);
+CategorySchema.virtual('url').get(
+    () => `/categories/${this.name.toLowerCase()}`,
+);
 
 const Category = model('Category', CategorySchema);
 export default Category;

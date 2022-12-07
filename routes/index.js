@@ -5,9 +5,9 @@ const router = expressRouter();
 
 router.get('/', (req, res, next) => {
   Item.find({}, 'name description category price number_in_stock')
-  // .lean()
+      .lean()
       .then((items) => {
-        res.render('pages/index', {title: 'Home', items: items});
+        res.render('pages/index', {title: 'Home', items});
       })
       .catch((err) => next(err));
 });

@@ -17,6 +17,7 @@ main {
   max-width: 70rem;
   width: 100vw;
   min-height: 80vh;
+  margin-inline: auto;
 }
 
 footer,

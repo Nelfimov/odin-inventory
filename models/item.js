@@ -1,3 +1,4 @@
+/* eslint-disable no-invalid-this */
 import {Schema, model} from 'mongoose';
 
 const ItemSchema = new Schema({
@@ -8,7 +9,7 @@ const ItemSchema = new Schema({
   number_in_stock: {type: Number, required: true},
 });
 
-ItemSchema.virtual('url').get(() => `/items/${_id}`);
+ItemSchema.virtual('url').get(() => `/items/${this._id}`);
 
 const Item = model('Item', ItemSchema);
 export default Item;
